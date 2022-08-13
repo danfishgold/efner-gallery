@@ -1,0 +1,14 @@
+[Unit]
+Description=Efner Gallery Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/pi/gallery/main.py
+WorkingDirectory=/home/pi/gallery
+Restart=on-failure
+RestartSec=60
+Environment=LC_ALL=en_US.UTF-8
+
+[Install]
+WantedBy=multi-user.target

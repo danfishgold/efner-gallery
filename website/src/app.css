@@ -1,0 +1,123 @@
+@font-face {
+  font-family: 'Brutalist';
+  font-weight: noraml;
+  src: url('/TelAviv-BrutalistRegular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Brutalist';
+  font-weight: bold;
+  src: url('/TelAviv-BrutalistBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Brutalist';
+  font-weight: 300;
+  src: url('/TelAviv-BrutalistLight.ttf') format('truetype');
+}
+
+:root {
+  --font-family: Brutalist, Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--font-family);
+  font-size: 16px;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+h1,
+p {
+  font-size: 5rem;
+  font-weight: normal;
+  line-height: 0.85;
+  margin: 0;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+@media (max-width: 700px) {
+  h1,
+  p {
+    font-size: 13vw;
+  }
+}
+
+form {
+  margin: 2rem 0;
+  padding: 2rem;
+  border: 2px dashed white;
+}
+
+form p {
+  font-size: 1rem;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+canvas {
+  border: 1px solid white;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+}
+
+#app {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6rem 1.2rem;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: #f9f9f9;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: black;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    color: #213547;
+    background-color: #f9f9f9;
+  }
+
+  form {
+    border-color: black;
+  }
+
+  canvas {
+    border-color: black;
+  }
+}
