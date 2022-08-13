@@ -1,3 +1,4 @@
+import logging
 import os
 import sys
 from base64 import b64decode
@@ -12,6 +13,17 @@ from dateutil.parser import parse as parse_date
 from dotenv import load_dotenv
 from supabase import Client, create_client
 
+logging.root.handlers = []
+logging.basicConfig(format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                    datefmt='%H:%M:%S',
+                    level=logging.DEBUG,
+                    handlers=[
+                        logging.FileHandler("debug.log"),
+                        logging.StreamHandler(sys.stdout)
+                    ])
+
+logging.info(f"Starting {__file__}")
+
 load_dotenv()
 
 try:
@@ -20,6 +32,7 @@ try:
     width, height = display.resolution
 
 except ImportError as e:
+    logging.info("Loading fake inky package")
     class FakeDisplay:
         def show(self):
             pass
@@ -49,8 +62,8 @@ class Art:
         self.id = db_art['id']
         self.created_at = parse_date(db_art["created_at"])
         self.pixels = Art.decode_pixels(db_art["pixels"])
-        # self.name = db_art["name"]
-        # self.artist = db_art["artist"]
+        self.name = db_art["name"]
+        self.artist = db_art["artist"]
 
     @staticmethod
     def decode_pixels(base_64_string: str):
@@ -63,12 +76,13 @@ url = os.environ.get("SUPABASE_URL")
 key = os.environ.get("SUPABASE_KEY")
 
 if not url or not key:
-    print("Missing environment variables for Supabase",file=sys.stderr)
+    logging.error("Missing environment variables for Supabase",file=sys.stderr)
     exit(1)
 
 supabase: Client = create_client(url, key)
 
 def load_art():
+    logging.info("Fetching all art")
     art_records = supabase.table("arts").select("*").order('created_at', desc=False).execute().data
 
     try:
@@ -77,24 +91,32 @@ def load_art():
 
         current_art_index = next(index for index,art_record in enumerate(art_records) if art_record['id'] == current_art_id)
         next_art = Art(art_records[(current_art_index + 1) % len(art_records)])
+        logging.info(f"Next art id: {next_art.id}")
     except BaseException as error:
         current_art_record = dict()
         next_art = Art(art_records[0])
-        print(error)
+        logging.error(f"Failed to get current art. Showing first art id: {next_art.id}")
+        logging.error(error)
 
+    logging.info("Updating current_art record")
     supabase.table('current_art').upsert({**current_art_record, 'regular_art_id': next_art.id}).execute()
+    logging.info(f"Displaying art id {next_art.id} titled {next_art.name} by {next_art.artist}")
     display.set_image(next_art.pixels)
     display.show()
 
 def run():
+    logging.info("Clearing the display")
     display.set_image([0]*width*height)
     display.show()
 
     while True:
         try:
             load_art()
+        except KeyboardInterrupt:
+            logging.error("Exiting due to keyboard interrupt")
+            exit(1)
         except BaseException as error:
-            print(error)
+            logging.error(error)
         sleep(60)
 
 run()
