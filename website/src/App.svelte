@@ -3,6 +3,7 @@
   import { supabase } from './db'
   import Home from './Home.svelte'
   import Manage from './Manage.svelte'
+  import Now from './Now.svelte'
   import { user } from './sessionStore'
 
   user.set(supabase.auth.user())
@@ -16,6 +17,7 @@
   const routes = {
     '/': Home,
     '/manage': Manage,
+    '/now': Now,
   }
 </script>
 

@@ -45,17 +45,16 @@ export async function fetchAllArt(): Promise<DBArt[]> {
   return data
 }
 
-export async function fetchCurrentArtId(): Promise<string | null> {
+export async function fetchCurrentArt(): Promise<DBArt | null> {
   const { data, error } = await supabase
-    .from<DBCurrentArt>('current_art')
+    .from<DBArt>('currently_displayed_art')
     .select('*')
-    .limit(1)
     .single()
 
   if (error) {
     throw error
   }
-  return data.new_art_id ?? data.regular_art_id
+  return data
 }
 
 export function onArtChanges(handler: () => void) {

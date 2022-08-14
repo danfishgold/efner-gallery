@@ -4,8 +4,8 @@
 
   import { submitArt } from './db'
 
-  import { link } from 'svelte-spa-router'
   import { ditherImageOnCanvas } from './dither'
+  import Nav from './Nav.svelte'
 
   let imageData: ImageData | undefined
   let files: FileList | undefined
@@ -52,7 +52,7 @@
 
 <main>
   {#if $user}
-    <div style="margin-bottom: 2rem"><a use:link href="/manage">ניהול</a></div>
+    <Nav />
   {/if}
   <h1>גלריה אפנר</h1>
   <p>212 על 104 פיקסלים</p>

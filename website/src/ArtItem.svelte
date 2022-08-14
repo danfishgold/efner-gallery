@@ -3,6 +3,7 @@
   import { decodeImageData } from './coding'
 
   import { deleteArt, type DBArt } from './db'
+  import { user } from './sessionStore'
 
   export let art: DBArt
   let canvas: HTMLCanvasElement | undefined
@@ -46,7 +47,9 @@
         new Date(art.created_at),
       )}
     </div>
-    <button disabled={deleted} on:click={onDelete}>מחיקה</button>
+    {#if $user}
+      <button disabled={deleted} on:click={onDelete}>מחיקה</button>
+    {/if}
   </div>
 </div>
 

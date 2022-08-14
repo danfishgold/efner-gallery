@@ -1,35 +1,29 @@
 <script lang="ts">
   import ArtItem from './ArtItem.svelte'
-
-  import { fetchAllArt, fetchCurrentArtId } from './db'
-
-  async function fetchArt() {
-    const [allArts, currentArtId] = await Promise.all([
-      fetchAllArt(),
-      fetchCurrentArtId(),
-    ])
-
-    const currentArt = allArts.find((art) => art.id === currentArtId)
-    return { allArts, currentArt }
-  }
-
-  let art = fetchArt()
+  import { fetchAllArt, fetchCurrentArt } from './db'
+  import Error from './Error.svelte'
 </script>
 
 <div>
-  {#await art}
+  <h1>ניהול</h1>
+  {#await fetchCurrentArt()}
     <div>טוען</div>
-  {:then { allArts, currentArt }}
-    {#if currentArt}
+  {:then art}
+    {#if art}
       <h2>מוצג כעת</h2>
-      <ArtItem art={currentArt} />
+      <ArtItem {art} />
     {/if}
-    <h2>כל האמנויות (מהחדש לישן)</h2>
+  {:catch error}
+    <Error {error} />
+  {/await}
+  <h2>כל האמנויות (מהחדש לישן)</h2>
+  {#await fetchAllArt()}
+    <div>טוען</div>
+  {:then allArts}
     {#each allArts as art}
       <ArtItem {art} />
     {/each}
   {:catch error}
-    <div>שגיאה</div>
-    <div>{JSON.stringify(error)}</div>
+    <Error {error} />
   {/await}
 </div>
