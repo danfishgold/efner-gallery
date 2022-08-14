@@ -6,11 +6,11 @@
 
 <div>
   <h1>ניהול</h1>
+  <h2>מוצג כעת</h2>
   {#await fetchCurrentArt()}
     <div>טוען</div>
   {:then art}
     {#if art}
-      <h2>מוצג כעת</h2>
       <ArtItem {art} />
     {/if}
   {:catch error}

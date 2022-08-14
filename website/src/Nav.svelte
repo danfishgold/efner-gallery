@@ -21,6 +21,6 @@
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    margin: 1rem 0;
+    margin: 1rem 0 2rem;
   }
 </style>
