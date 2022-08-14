@@ -1,8 +1,8 @@
 <script lang="ts">
-  import ArtItem from './ArtItem.svelte'
-  import { fetchCurrentArt } from './db'
-  import Error from './Error.svelte'
-  import Nav from './Nav.svelte'
+  import ArtItem from '../ArtItem.svelte'
+  import { fetchCurrentArt } from '../db'
+  import Error from '../Error.svelte'
+  import Nav from '../Nav.svelte'
 </script>
 
 <Nav />

@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { encodeImageData } from './coding'
-  import { user } from './sessionStore'
+  import { encodeImageData } from '../coding'
+  import { user } from '../sessionStore'
 
-  import { submitArt } from './db'
+  import { submitArt } from '../db'
 
-  import { ditherImageOnCanvas } from './dither'
-  import Nav from './Nav.svelte'
+  import { ditherImageOnCanvas } from '../dither'
+  import Nav from '../Nav.svelte'
 
   let imageData: ImageData | undefined
   let files: FileList | undefined

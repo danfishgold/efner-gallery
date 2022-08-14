@@ -1,9 +1,9 @@
 <script lang="ts">
   import Router from 'svelte-spa-router'
   import { supabase } from './db'
-  import Home from './Home.svelte'
-  import Manage from './Manage.svelte'
-  import Now from './Now.svelte'
+  import Home from './pages/Home.svelte'
+  import Manage from './pages/Manage.svelte'
+  import Now from './pages/Now.svelte'
   import { user } from './sessionStore'
 
   user.set(supabase.auth.user())
