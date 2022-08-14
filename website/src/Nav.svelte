@@ -7,7 +7,7 @@
 
 <nav>
   {#if $location !== '/'}
-    <a use:link href="/">עמוד הבית</a>
+    <a use:link href="/">תביאו</a>
   {/if}
   <a use:link={{ disabled: $location === '/what' }} href="/what">מה</a>
   <a use:link={{ disabled: $location === '/now' }} href="/now">כעת</a>
