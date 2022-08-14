@@ -50,16 +50,18 @@
   }
 </script>
 
+{#if $user}
+  <Nav />
+{/if}
 <main>
-  {#if $user}
-    <Nav />
-  {/if}
-  <h1>גלריה אפנר</h1>
-  <p>212 על 104 פיקסלים</p>
-  <p>(לרוחב)</p>
-  <p>שחור לבן בלבד</p>
-  <p>גם לא אפור</p>
-  <p>שיהיה יפה דיר בלאק</p>
+  <div class="intro">
+    <h1>גלריה אפנר</h1>
+    <p>212 על 104 פיקסלים</p>
+    <p>(לרוחב)</p>
+    <p>שחור לבן בלבד</p>
+    <p>גם לא אפור</p>
+    <p>שיהיה יפה דיר בלאק</p>
+  </div>
   <form on:submit|preventDefault={onSubmit}>
     <canvas
       width="212"
@@ -102,3 +104,26 @@
     {/if}
   </form>
 </main>
+{#if !$user}
+  <footer><Nav /></footer>
+{/if}
+
+<style scoped>
+  main {
+    flex-grow: 1;
+    padding-top: 1rem;
+  }
+  .intro h1,
+  .intro p {
+    font-size: 5rem;
+    line-height: 0.85;
+    margin: 0;
+  }
+
+  @media (max-width: 700px) {
+    .intro h1,
+    .intro p {
+      font-size: 13vw;
+    }
+  }
+</style>

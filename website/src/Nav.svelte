@@ -6,9 +6,12 @@
 </script>
 
 <nav>
-  <a use:link={{ disabled: $location === '/' }} href="/">עמוד הבית</a>
+  {#if $location !== '/'}
+    <a use:link href="/">עמוד הבית</a>
+  {/if}
+  <a use:link={{ disabled: $location === '/what' }} href="/what">מה</a>
+  <a use:link={{ disabled: $location === '/now' }} href="/now">כעת</a>
   {#if $user}
-    <a use:link={{ disabled: $location === '/now' }} href="/now">כעת</a>
     <a use:link={{ disabled: $location === '/manage' }} href="/manage">ניהול</a>
     <button on:click={() => signOut()}>התנתקות</button>
   {/if}

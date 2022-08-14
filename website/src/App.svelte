@@ -1,6 +1,7 @@
 <script lang="ts">
   import Router from 'svelte-spa-router'
   import { supabase } from './db'
+  import About from './pages/About.svelte'
   import Home from './pages/Home.svelte'
   import Manage from './pages/Manage.svelte'
   import Now from './pages/Now.svelte'
@@ -18,9 +19,8 @@
     '/': Home,
     '/manage': Manage,
     '/now': Now,
+    '/what': About,
   }
 </script>
 
-<main>
-  <Router {routes} />
-</main>
+<Router {routes} />
