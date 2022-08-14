@@ -50,9 +50,7 @@
   }
 </script>
 
-{#if $user}
-  <Nav />
-{/if}
+<Nav />
 <main>
   <div class="intro">
     <h1>גלריה אפנר</h1>
@@ -104,9 +102,6 @@
     {/if}
   </form>
 </main>
-{#if !$user}
-  <footer><Nav /></footer>
-{/if}
 
 <style scoped>
   main {

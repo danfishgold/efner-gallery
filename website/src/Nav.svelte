@@ -6,9 +6,7 @@
 </script>
 
 <nav>
-  {#if $location !== '/'}
-    <a use:link href="/">תביאו</a>
-  {/if}
+  <a use:link={{ disabled: $location === '/' }} href="/">הגשה</a>
   <a use:link={{ disabled: $location === '/what' }} href="/what">מה</a>
   <a use:link={{ disabled: $location === '/now' }} href="/now">כעת</a>
   {#if $user}
