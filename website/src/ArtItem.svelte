@@ -6,6 +6,7 @@
   import { user } from './sessionStore'
 
   export let art: DBArt
+  export let withImage = true
   let canvas: HTMLCanvasElement | undefined
   let deleted = false
 
@@ -39,7 +40,9 @@
 </script>
 
 <div class="art-item {deleted && 'art-item--deleted'}">
-  <canvas bind:this={canvas} width="212" height="104" />
+  {#if withImage}
+    <canvas bind:this={canvas} width="212" height="104" />
+  {/if}
   <div class="metadata">
     <div class="artist">{art.artist || 'אמן לא ידוע'}</div>
     <div class="name-and-date">

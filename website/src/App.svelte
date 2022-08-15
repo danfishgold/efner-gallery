@@ -1,17 +1,15 @@
 <script lang="ts">
-  import Router from 'svelte-spa-router'
+  import Router, { querystring } from 'svelte-spa-router'
   import { supabase } from './db'
   import About from './pages/About.svelte'
   import Home from './pages/Home.svelte'
   import Manage from './pages/Manage.svelte'
   import Now from './pages/Now.svelte'
-  import { user } from './sessionStore'
+  import { openedThroughQRCode, user } from './sessionStore'
 
   user.set(supabase.auth.user())
-
-  console.log({ user: supabase.auth.user() })
+  openedThroughQRCode.set($querystring === 'qr')
   supabase.auth.onAuthStateChange((state, session) => {
-    console.log({ user: session?.user ?? null, session, state })
     user.set(state === 'SIGNED_IN' ? session?.user ?? null : null)
   })
 

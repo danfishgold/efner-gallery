@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { openedThroughQRCode } from '../sessionStore'
+
   import ArtItem from '../ArtItem.svelte'
   import { fetchCurrentArt } from '../db'
   import Error from '../Error.svelte'
@@ -12,7 +14,7 @@
     <div>טוען</div>
   {:then art}
     {#if art}
-      <ArtItem {art} />
+      <ArtItem {art} withImage={!$openedThroughQRCode} />
     {:else}
       <div>כלום.</div>
     {/if}
